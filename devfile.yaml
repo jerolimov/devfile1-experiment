@@ -13,7 +13,7 @@ components:
     image: node:12-alpine
     memoryLimit: 512Mi
     endpoints:
-      - name: 'nodejs'
+      - name: nodejs
         port: 3000
     mountSources: true
 commands:
