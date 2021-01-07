@@ -1,0 +1,34 @@
+apiVersion: 1.0.0
+metadata:
+  generateName: devfile1-experiment-
+projects:
+  - name: nodeinfo
+    source:
+      type: github
+      location: https://github.com/jerolimov/docker
+      sparseCheckoutDir: /nodeinfo/
+components:
+  - alias: node
+    type: dockerimage
+    image: node:12-alpine
+    memoryLimit: 512Mi
+    endpoints:
+      - name: 'nodejs'
+        port: 3000
+    mountSources: true
+commands:
+  - name: build
+    actions:
+      - type: exec
+        component: node
+        command: npm run build
+  - name: start dev
+    actions:
+      - type: exec
+        component: node
+        command: npm run dev
+  - name: start prod
+    actions:
+      - type: exec
+        component: node
+        command: npm run build && npm start
